@@ -48,6 +48,9 @@ public class Main {
                 FileDatabase fO = new FileOrchestrator();
                 fO.saveFile(mFile.getPath(), mFile.getContent(), mFile.getType(), mFile.getNameFile());
                 break;
+            case 3:
+                System.out.println("Salvar Imagem.");
+                break;
             case 4:
                 System.out.println("Digite o caminho do diretorio: ");
                 path = scanner.nextLine();
@@ -56,11 +59,38 @@ public class Main {
                 fO = new FileOrchestrator();
                 fO.recoveryFile(path, nameFile);
                 break;
+            case 5:
+                System.out.println("Listar imagens.");
+                break;
+            case 6:
+                opcao = montarOpcoesFolders();
+                String tipo = null;
+                if (opcao == 1){
+                    tipo = "reminders";
+                } else if (opcao == 2) {
+                    tipo = "importants";
+                } else if (opcao == 3) {
+                    tipo = "";
+                } else if (opcao == 4) {
+                    tipo = "images";
+                }
+                System.out.println("Remover arquivos.");
+                System.out.println("Digite o caminho do diretorio: ");
+                path = scanner.nextLine();
+                System.out.println("Digite o nome do arquivo: ");
+                nameFile = scanner.nextLine();
+                fO = new FileOrchestrator();
+                fO.removeFile(path, nameFile, tipo);
+                break;
             case 7:
-                System.out.println("Digite um caminho: ");
+                System.out.println("Remover imagens");
+                break;
+            case 8:
+                System.out.println("Digite o caminho do diretorio: ");
                 path = scanner.nextLine();
                 FolderManagement fM2 = new FolderOrchestrator();
                 fM2.removeFolder(path);
+                break;
             default:
                 System.out.println("Opção inválida");
         }
@@ -87,8 +117,9 @@ public class Main {
         System.out.println("3- Salvar imagem");
         System.out.println("4- Listar arquivos txt ok");
         System.out.println("5- Listar imagens");
-        System.out.println("6- Remover arquivos");
-        System.out.println("7- Remover Pasta");
+        System.out.println("6- Remover arquivos txt ok");
+        System.out.println("7- Remover imagens");
+        System.out.println("8- Remover Pasta ok");
         System.out.println("Digite a opção desejada: ");
         int opcao = scanner.nextInt();
         return opcao;
