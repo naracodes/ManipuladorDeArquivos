@@ -2,6 +2,8 @@ package br.com.ada.polotech925;
 
 import java.io.*;
 import java.util.List;
+import java.util.Scanner;
+
 import br.com.ada.polotech925.MFileAnnotationTypeEnum;
 
 public class FileOrchestrator extends FolderOrchestrator implements FileDatabase, ImageFileDatabase {
@@ -40,13 +42,13 @@ public class FileOrchestrator extends FolderOrchestrator implements FileDatabase
         String dir = "";
         switch (type) {
             case "REMINDER" -> {
-                dir = "reminder";
+                dir = "reminders";
             }
             case "IMPORTANT" -> {
-                dir = "important";
+                dir = "importants";
             }
             case "IMAGE" -> {
-                dir = "image";
+                dir = "images";
             }
             default -> {
                 dir = "";
@@ -65,6 +67,22 @@ public class FileOrchestrator extends FolderOrchestrator implements FileDatabase
 
     @Override
     public void recoveryFile(String directory, String nameFile) {
+        directory = directory + "//" + nameFile + ".txt";
+        File textFile = new File(directory);
+        Scanner in = null;
+        try {
+            in = new Scanner(textFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println();
+        System.out.println("Nome do arquivo: " + nameFile + ".txt" );
+        System.out.println("Conteudo:");
+        while(in.hasNextLine()){
+            String line = in.nextLine();
+            System.out.println(line);
+        }
+        in.close();
 
     }
 
