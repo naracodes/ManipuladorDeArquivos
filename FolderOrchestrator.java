@@ -19,6 +19,9 @@ public class FolderOrchestrator implements FolderManagement{
 
         if (!file.exists()) {
             file.mkdirs();
+            System.out.println("Diretório criado com sucesso!");
+        }else{
+            System.out.println("Esse diretório já existe!");
         }
     }
 
