@@ -1,9 +1,11 @@
 import br.com.ada.polotech925.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Bem Vindo ao Gerenciador de Arquivos");
         switch (montarOpcoesMenu()){
@@ -25,17 +27,35 @@ public class Main {
                 break;
             case 2:
                 MFile mFile = new MFile();
-                System.out.println("Digite o caminho: ");
-                path = scanner.nextLine();
+                int type = montarOpcoesFolders();
+                if (type == 1){
+                    mFile.setType("REMINDER");
+                } else if (type == 2) {
+                    mFile.setType("IMPORTANT");
+                } else if (type == 3) {
+                    mFile.setType("SIMPLE");
+                } else if (type == 4) {
+                    System.out.println("Opção não permitida para arquivo txt.");
+                    break;
+                }
+                System.out.println("Digite o caminho do diretorio: ");
+                mFile.setPath(scanner.nextLine());
                 System.out.println("Digite o conteudo: ");
-                String content = scanner.nextLine();
+                mFile.setContent(scanner.nextLine());
                 System.out.println("Digite o nome do arquivo: ");
-                String name = scanner.nextLine();
-                System.out.println("Digite o tipo do arquivo: ");
-                String type = scanner.nextLine().toUpperCase();
+                mFile.setNameFile(scanner.nextLine());
 
                 FileDatabase fO = new FileOrchestrator();
-                fO.saveFile(path, content, type, name);
+                fO.saveFile(mFile.getPath(), mFile.getContent(), mFile.getType(), mFile.getNameFile());
+                break;
+            case 4:
+                System.out.println("Digite o caminho do diretorio: ");
+                path = scanner.nextLine();
+                System.out.println("Digite o nome do arquivo: ");
+                String nameFile = scanner.nextLine();
+                fO = new FileOrchestrator();
+                fO.recoveryFile(path, nameFile);
+                break;
             case 7:
                 System.out.println("Digite um caminho: ");
                 path = scanner.nextLine();
@@ -63,9 +83,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("----------MENU-----------");
         System.out.println("1- Criar Pasta ok");
-        System.out.println("2- Criar arquivo txt");
+        System.out.println("2- Salvar arquivo txt ok");
         System.out.println("3- Salvar imagem");
-        System.out.println("4- Listar arquivos txt");
+        System.out.println("4- Listar arquivos txt ok");
         System.out.println("5- Listar imagens");
         System.out.println("6- Remover arquivos");
         System.out.println("7- Remover Pasta");
