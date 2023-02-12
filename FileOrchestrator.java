@@ -87,8 +87,14 @@ public class FileOrchestrator extends FolderOrchestrator implements FileDatabase
     }
 
     @Override
-    public void removeFile(String directory, String nameFile, MFileAnnotationTypeEnum type) {
+    public void removeFile(String directory, String nameFile, String type) {
+        directory = directory + "//" + type + "//" + nameFile + ".txt";
+        File file = new File(directory);
 
+        if (file.isFile()) {
+            file.delete();
+            System.out.println("Arquivo deletado com sucesso!");
+        } else System.out.println("Arquivo não encontrado.");
     }
 
     @Override
