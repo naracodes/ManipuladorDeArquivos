@@ -28,7 +28,12 @@ public class FolderOrchestrator implements FolderManagement{
     @Override
     public void removeFolder(String path) {
         File file = new File(path);
-        file.delete();
+        boolean isTrue = file.delete();
+        if(isTrue){
+            System.out.println("Pasta deletada com sucesso!");
+        }else{
+            System.out.println("Erro ao deletar a pasta.");
+        }
     }
 
     @Override
