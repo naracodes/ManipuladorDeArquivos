@@ -1,8 +1,10 @@
 import br.com.ada.polotech925.*;
+import br.com.ada.polotech925.MFileAnnotationTypeEnum;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
@@ -29,24 +31,28 @@ public class Main {
                 MFile mFile = new MFile();
                 int type = montarOpcoesFolders();
                 if (type == 1){
-                    mFile.setType("REMINDER");
+                    mFile.setType(MFileAnnotationTypeEnum.REMINDER);
                 } else if (type == 2) {
-                    mFile.setType("IMPORTANT");
+                    mFile.setType(MFileAnnotationTypeEnum.IMPORTANT);
                 } else if (type == 3) {
-                    mFile.setType("SIMPLE");
+                    mFile.setType(MFileAnnotationTypeEnum.SIMPLE);
                 } else if (type == 4) {
                     System.out.println("Opção não permitida para arquivo txt.");
                     break;
                 }
                 System.out.println("Digite o caminho do diretorio: ");
                 mFile.setPath(scanner.nextLine());
-                System.out.println("Digite o conteudo: ");
-                mFile.setContent(scanner.nextLine());
-                System.out.println("Digite o nome do arquivo: ");
-                mFile.setNameFile(scanner.nextLine());
-
+                path = mFile.getPath() + "//" + type;
                 FileDatabase fO = new FileOrchestrator();
-                fO.saveFile(mFile.getPath(), mFile.getContent(), mFile.getType(), mFile.getNameFile());
+                if(FileOrchestrator.directoryExist(path)){
+                    System.out.println("Digite o conteudo: ");
+                    mFile.setContent(scanner.nextLine());
+                    System.out.println("Digite o nome do arquivo: ");
+                    mFile.setNameFile(scanner.nextLine());
+                    fO.saveFile(mFile.getPath(), mFile.getContent(), mFile.getType(), mFile.getNameFile());
+                }else{
+                    System.out.println("Diretório não encontrado!");
+                }
                 break;
             case 3:
                 System.out.println("Salvar Imagem.");
