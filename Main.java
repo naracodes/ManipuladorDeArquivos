@@ -70,15 +70,15 @@ public class Main {
                 break;
             case 6:
                 opcao = montarOpcoesFolders();
-                String tipo = null;
+                MFileAnnotationTypeEnum tipo = null;
                 if (opcao == 1){
-                    tipo = "reminders";
+                    tipo = MFileAnnotationTypeEnum.REMINDER;
                 } else if (opcao == 2) {
-                    tipo = "importants";
+                    tipo = MFileAnnotationTypeEnum.IMPORTANT;
                 } else if (opcao == 3) {
-                    tipo = "";
+                    tipo = MFileAnnotationTypeEnum.SIMPLE;
                 } else if (opcao == 4) {
-                    tipo = "images";
+                    tipo = MFileAnnotationTypeEnum.IMAGE;
                 }
                 System.out.println("Remover arquivos.");
                 System.out.println("Digite o caminho do diretorio: ");
