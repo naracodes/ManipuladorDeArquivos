@@ -13,7 +13,7 @@ public class MFile {
     }
 
     private String path;
-    private String type;
+    private MFileAnnotationTypeEnum type;
 
     public String getContent() {
         return content;
@@ -31,11 +31,11 @@ public class MFile {
         this.nameFile = nameFile;
     }
 
-    public String getType() {
+    public MFileAnnotationTypeEnum getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(MFileAnnotationTypeEnum type) {
         this.type = type;
     }
 }
