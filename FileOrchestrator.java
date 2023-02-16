@@ -38,16 +38,16 @@ public class FileOrchestrator extends FolderOrchestrator implements FileDatabase
     }
 
     @Override
-    public void saveFile(String directory, String content, String type, String nameFile) {
+    public void saveFile(String directory, String content, MFileAnnotationTypeEnum type, String nameFile) {
         String dir = "";
         switch (type) {
-            case "REMINDER" -> {
+            case REMINDER -> {
                 dir = "reminders";
             }
-            case "IMPORTANT" -> {
+            case IMPORTANT -> {
                 dir = "importants";
             }
-            case "IMAGE" -> {
+            case IMAGE -> {
                 dir = "images";
             }
             default -> {
@@ -100,5 +100,14 @@ public class FileOrchestrator extends FolderOrchestrator implements FileDatabase
     @Override
     public void listAllFiles(String directory) {
 
+    }
+
+    public static boolean directoryExist(String directory){
+        File file = new File(directory);
+        if(file.exists()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
